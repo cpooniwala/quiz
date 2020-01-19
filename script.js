@@ -51,12 +51,12 @@ var highScoreElement = document.getElementById("high-score")
 var initials = document.getElementById("user-initials")
 var userScore = document.getElementById("user-score")
 var highScoreButton = document.getElementById("view-highscores")
-
 //Create Variables
 var runningQuestionIndex = 0;
 var lastQuestionIndex = questions.length - 1;
 var questionTime = 75;
 var stopTimer;
+var clearInitials;
 
 //Create Event Listeners
 startButton.addEventListener('click', startGame)
@@ -71,6 +71,7 @@ function startGame(){
     startButton.classList.add("hide")
     highScoreElement.classList.add("hide")
     questionContainerElement.classList.remove("hide")
+    clearInitials = initialsTextbox.value="";
     renderQuestion()
     stopTimer = setInterval(renderTimer, 1000);
 }
@@ -180,5 +181,12 @@ function viewHighScores(){
     
     timer.classList.add("hide");
     questionContainerElement.classList.add("hide")
+    doneMessage.classList.add("hide")
+    scoreMessage.classList.add("hide")
+    initialsLabel.classList.add("hide")
+    initialsTextbox.classList.add("hide")
+    initialsButton.classList.add("hide")
+    initialsError.classList.add("hide")
+
     clearInterval(stopTimer);
 }
