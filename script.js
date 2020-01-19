@@ -51,6 +51,7 @@ var highScoreElement = document.getElementById("high-score")
 var initials = document.getElementById("user-initials")
 var userScore = document.getElementById("user-score")
 var highScoreButton = document.getElementById("view-highscores")
+
 //Create Variables
 var runningQuestionIndex = 0;
 var lastQuestionIndex = questions.length - 1;
@@ -63,6 +64,7 @@ startButton.addEventListener('click', startGame)
 initialsButton.addEventListener('click',submitScore)
 highScoreButton.addEventListener('click',viewHighScores)
 
+//Function to Start the Game
 function startGame(){
     questionTime=75;
     runningQuestionIndex = 0;
@@ -76,6 +78,7 @@ function startGame(){
     stopTimer = setInterval(renderTimer, 1000);
 }
 
+//Function to Create the Timer
 function renderTimer () {
     questionTime--;
     time.innerHTML = questionTime;
@@ -84,8 +87,10 @@ function renderTimer () {
     }
 }
 
-
+//Function to Display the appropriate Question
 function renderQuestion(){
+    //correctElement.classList.add("hide")
+    //wrongElement.classList.add("hide")
     questionElement.innerHTML = questions[runningQuestionIndex].title;
     answerA.innerHTML = questions[runningQuestionIndex].choices[0];
     answerB.innerHTML = questions[runningQuestionIndex].choices[1];
@@ -93,6 +98,7 @@ function renderQuestion(){
     answerD.innerHTML = questions[runningQuestionIndex].choices[3];
 }
 
+//Function to check if the answer is correct or incorrect
 function checkAnswer(answer){
     console.log(answer)
     if(questions[runningQuestionIndex].correct === answer){
@@ -112,18 +118,21 @@ function checkAnswer(answer){
     }
 }
  
+//Function to perform next steps if user response is correct
 function answerIsCorrect() {
     correctElement.classList.remove("hide")
     questionTime += 5;
     renderQuestion()
 }
 
+//Function to perform next steps if user response is incorrect
 function answerIsWrong() {
     wrongElement.classList.remove("hide")
     questionTime-= 5;
     renderQuestion(stopTimer);
 }
 
+//Actions to perform if the game has ended
 function endGame(){
     scoreMessage.innerHTML="Your Score is "+ questionTime;
     clearInterval(stopTimer);
@@ -140,6 +149,7 @@ function endGame(){
     initialsButton.classList.remove("hide")
 }
 
+//Actions to Perform when the user selects the Submit CTA
 function submitScore(){
     var initialsValue = document.getElementById("initials-textbox").value;
     if(initialsValue===""){
@@ -152,6 +162,7 @@ function submitScore(){
     }
 }
 
+//Actions to display the high score
 function highScore() {
     doneMessage.classList.add("hide")
     scoreMessage.classList.add("hide")
@@ -175,6 +186,7 @@ function highScore() {
     scoreSpan.textContent = lastScore;
 }    
 
+//Actions to perform when the user selects the view high score CTA
 function viewHighScores(){
     startButton.classList.remove("hide")
     highScoreElement.classList.remove("hide")
