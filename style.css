@@ -1,0 +1,19 @@
+.btn-outline-primary{
+margin-top: 10px;
+
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.hide{
+    display: none;
+}
+
+.display{
+    display: block;
+}
