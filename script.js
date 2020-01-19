@@ -50,6 +50,7 @@ var initialsError = document.getElementById("error-message")
 var highScoreElement = document.getElementById("high-score")
 var initials = document.getElementById("user-initials")
 var userScore = document.getElementById("user-score")
+var highScoreButton = document.getElementById("view-highscores")
 
 //Create Variables
 var runningQuestionIndex = 0;
@@ -60,6 +61,7 @@ var stopTimer;
 //Create Event Listeners
 startButton.addEventListener('click', startGame)
 initialsButton.addEventListener('click',submitScore)
+highScoreButton.addEventListener('click',viewHighScores)
 
 function startGame(){
     questionTime=75;
@@ -171,3 +173,12 @@ function highScore() {
     initialsSpan.textContent = lastInitials;
     scoreSpan.textContent = lastScore;
 }    
+
+function viewHighScores(){
+    startButton.classList.remove("hide")
+    highScoreElement.classList.remove("hide")
+    
+    timer.classList.add("hide");
+    questionContainerElement.classList.add("hide")
+    clearInterval(stopTimer);
+}
