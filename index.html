@@ -15,8 +15,8 @@
 </head>
 
 <body>
-    <div class="highscore">View Highscores</div>
-    <div id="timer"></div>
+    <button class="highscore" id="view-highscores">View Highscores</button>
+    <div id="timer" class="hide"></div>
     <div id="start-text" class="hide">Start!</div>
     <div id="question-container" class="hide">
         <div id="question">Question</div>
@@ -38,5 +38,13 @@
     <div class="end-game">
         <div id="done-message" class="hide">All Done!</div>
         <div id="score-message" class="hide"></div>
+        <div id="initials-label" class="hide">Enter Your Initials Here</div>
+        <input id="initials-textbox" class="hide"></div>
+        <div id="error-message" class="hide">Please Enter Your Initials Before Submitting</div>
+        <button id="initials-btn" class="hide">Submit</button>
+    </div>
+    <div id="high-score" class="hide">
+        <div id="high-score-message">Highscores</div>
+        <span id="user-initials"></span> <span id="user-score"></span>
     </div>
 </html>

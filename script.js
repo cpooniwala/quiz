@@ -41,18 +41,33 @@ var answerD = document.getElementById("D")
 var correctElement = document.getElementById("response-correct")
 var wrongElement = document.getElementById("response-wrong")
 var time = document.getElementById("timer")
+var doneMessage = document.getElementById("done-message")
+var scoreMessage = document.getElementById("score-message")
+var initialsLabel = document.getElementById("initials-label")
+var initialsTextbox = document.getElementById("initials-textbox")
+var initialsButton = document.getElementById("initials-btn")
+var initialsError = document.getElementById("error-message")
+var highScoreElement = document.getElementById("high-score")
+var initials = document.getElementById("user-initials")
+var userScore = document.getElementById("user-score")
 
 //Create Variables
 var runningQuestionIndex = 0;
 var lastQuestionIndex = questions.length - 1;
-var questionTime = 15;
+var questionTime = 75;
 var stopTimer;
 
 //Create Event Listeners
 startButton.addEventListener('click', startGame)
+initialsButton.addEventListener('click',submitScore)
 
 function startGame(){
+    questionTime=75;
+    runningQuestionIndex = 0;
+    lastQuestionIndex = questions.length - 1;
+    time.classList.remove("hide")
     startButton.classList.add("hide")
+    highScoreElement.classList.add("hide")
     questionContainerElement.classList.remove("hide")
     renderQuestion()
     stopTimer = setInterval(renderTimer, 1000);
@@ -106,8 +121,53 @@ function answerIsWrong() {
     renderQuestion(stopTimer);
 }
 
-
 function endGame(){
+    scoreMessage.innerHTML="Your Score is "+ questionTime;
     clearInterval(stopTimer);
     console.log("game has ended");
-} 
+    questionContainerElement.classList.add("hide")
+    correctElement.classList.add("hide")
+    wrongElement.classList.add("hide")
+    timer.classList.add("hide")
+
+    doneMessage.classList.remove("hide")
+    scoreMessage.classList.remove("hide")
+    initialsLabel.classList.remove("hide")
+    initialsTextbox.classList.remove("hide")
+    initialsButton.classList.remove("hide")
+}
+
+function submitScore(){
+    var initialsValue = document.getElementById("initials-textbox").value;
+    if(initialsValue===""){
+        initialsError.classList.remove("hide")
+    }
+    else{
+        localStorage.setItem("initials", initialsValue);
+        localStorage.setItem("score", questionTime);
+        highScore()
+    }
+}
+
+function highScore() {
+    doneMessage.classList.add("hide")
+    scoreMessage.classList.add("hide")
+    initialsLabel.classList.add("hide")
+    initialsTextbox.classList.add("hide")
+    initialsButton.classList.add("hide")
+    initialsError.classList.add("hide")
+
+    startButton.classList.remove("hide")
+    highScoreElement.classList.remove("hide")
+    var lastInitials = localStorage.getItem("initials");
+    var lastScore = localStorage.getItem("score");
+    console.log(lastInitials, lastScore);
+    var newDiv = document.createElement("div")
+    highScoreElement.appendChild(newDiv);
+    var initialsSpan = document.createElement("span");
+    var scoreSpan = document.createElement("span");
+    newDiv.appendChild(initialsSpan);
+    newDiv.appendChild(scoreSpan);
+    initialsSpan.textContent = lastInitials;
+    scoreSpan.textContent = lastScore;
+}    
