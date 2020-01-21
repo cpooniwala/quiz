@@ -1,32 +1,3 @@
-//Questions
-var questions = [
-    {
-        title: "Commonly used data types DO NOT include:",
-        choices: ["strings", "booleans", "alerts", "numbers"],
-        correct: "C"
-    },
-    {
-        title: "The condition in an if / else statement is enclosed within ____.",
-        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-        correct: "C"
-    },
-    {
-        title: "Inside which HTML element do we put the JavaScript? ____.",
-        choices: ["script", "javascript", "scripting", "js"],
-        correct: "A"
-    },
-    {
-        title: "What is the correct syntax for referring to an external script called? ____.",
-        choices: ["script src='xxx.js'", "script href='xxx.js'", "script name='xxx.js'", "script type='xxx.js'"],
-        correct: "A"
-    },
-    {
-        title: "How do you create a function in JavaScript? ____.",
-        choices: ["function = myFunction()", "function myFunction()", "function::myFunction()", "function.myFunction()"],
-        correct: "B"
-    }
-]
-
 //Grab Elements from HTML
 var startText = document.getElementById("start-text")
 var questionContainerElement = document.getElementById("question-container")
@@ -51,6 +22,7 @@ var highScoreElement = document.getElementById("high-score")
 var initials = document.getElementById("user-initials")
 var userScore = document.getElementById("user-score")
 var highScoreButton = document.getElementById("view-highscores")
+var highScoreResults = document.getElementById("high-score-results")
 
 //Create Variables
 var runningQuestionIndex = 0;
@@ -66,11 +38,14 @@ highScoreButton.addEventListener('click',viewHighScores)
 
 //Function to Start the Game
 function startGame(){
+    time.innerHTML = 75;
     questionTime=75;
     runningQuestionIndex = 0;
     lastQuestionIndex = questions.length - 1;
     time.classList.remove("hide")
     startButton.classList.add("hide")
+    //startButton.classList.remove("btn")
+    //startButton.classList.remove("btn-primary")
     highScoreElement.classList.add("hide")
     questionContainerElement.classList.remove("hide")
     clearInitials = initialsTextbox.value="";
@@ -100,7 +75,7 @@ function renderQuestion(){
 
 //Function to check if the answer is correct or incorrect
 function checkAnswer(answer){
-    console.log(answer)
+    //console.log(answer)
     if(questions[runningQuestionIndex].correct === answer){
         answerIsCorrect()
     }
@@ -120,14 +95,23 @@ function checkAnswer(answer){
  
 //Function to perform next steps if user response is correct
 function answerIsCorrect() {
+    correctElement.classList.add("text-success")
     correctElement.classList.remove("hide")
+    setTimeout(function (){
+        correctElement.classList.add("hide")
+    },1000)
     questionTime += 5;
     renderQuestion()
+
 }
 
 //Function to perform next steps if user response is incorrect
 function answerIsWrong() {
     wrongElement.classList.remove("hide")
+    wrongElement.classList.add("text-danger")
+    setTimeout(function (){
+        wrongElement.classList.add("hide")
+    },1000)
     questionTime-= 5;
     renderQuestion(stopTimer);
 }
@@ -136,7 +120,7 @@ function answerIsWrong() {
 function endGame(){
     scoreMessage.innerHTML="Your Score is "+ questionTime;
     clearInterval(stopTimer);
-    console.log("game has ended");
+    //console.log("game has ended");
     questionContainerElement.classList.add("hide")
     correctElement.classList.add("hide")
     wrongElement.classList.add("hide")
@@ -153,6 +137,7 @@ function endGame(){
 function submitScore(){
     var initialsValue = document.getElementById("initials-textbox").value;
     if(initialsValue===""){
+        initialsError.classList.add("text-warning")
         initialsError.classList.remove("hide")
     }
     else{
@@ -172,14 +157,19 @@ function highScore() {
     initialsError.classList.add("hide")
 
     startButton.classList.remove("hide")
+    //startButton.classList.add("btn")
+    //startButton.classList.add("btn-primary")
     highScoreElement.classList.remove("hide")
     var lastInitials = localStorage.getItem("initials");
     var lastScore = localStorage.getItem("score");
     console.log(lastInitials, lastScore);
     var newDiv = document.createElement("div")
-    highScoreElement.appendChild(newDiv);
+    newDiv.classList.add("card-body");
+    highScoreResults.appendChild(newDiv);
     var initialsSpan = document.createElement("span");
     var scoreSpan = document.createElement("span");
+    scoreSpan.classList.add("badge");
+    scoreSpan.classList.add("badge-info");
     newDiv.appendChild(initialsSpan);
     newDiv.appendChild(scoreSpan);
     initialsSpan.textContent = lastInitials;
@@ -189,6 +179,8 @@ function highScore() {
 //Actions to perform when the user selects the view high score CTA
 function viewHighScores(){
     startButton.classList.remove("hide")
+    //startButton.classList.add("btn")
+    //startButton.classList.add("btn-primary")
     highScoreElement.classList.remove("hide")
     
     timer.classList.add("hide");
@@ -199,6 +191,8 @@ function viewHighScores(){
     initialsTextbox.classList.add("hide")
     initialsButton.classList.add("hide")
     initialsError.classList.add("hide")
+    correctElement.classList.add("hide")
+    wrongElement.classList.add("hide")
 
     clearInterval(stopTimer);
 }

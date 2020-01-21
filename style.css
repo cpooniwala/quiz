@@ -3,17 +3,14 @@ margin-top: 10px;
 
 }
 
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
 .hide{
     display: none;
 }
 
 .display{
     display: block;
+}
+
+.badge-info{
+    margin-left: 5px;
 }

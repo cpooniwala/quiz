@@ -5,46 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JavaScript Quiz</title>
-    <script defer src="script.js"></script>
-    <script defer src="questions.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <button class="highscore" id="view-highscores">View Highscores</button>
-    <div id="timer" class="hide"></div>
-    <div id="start-text" class="hide">Start!</div>
-    <div id="question-container" class="hide">
-        <div id="question">Question</div>
-        <div id="answer-buttons" class="btn-grid">
-            <button class="btn" id="A" onclick="checkAnswer('A')">Answer A</button>
-            <button class="btn" id="B" onclick="checkAnswer('B')">Answer B</button>
-            <button class="btn" id="C" onclick="checkAnswer('C')">Answer C</button>
-            <button class="btn" id="D" onclick="checkAnswer('D')">Answer D</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-info" id="view-highscores">View Highscores</button>
+            </div>
+            <div class="col-md-8">
+                <div class="container-test"> </div>
+                <div id="timer" class="hide"></div>
+                <div id="start-text" class="hide">Start!</div>
+                <div id="question-container" class="card hide">
+                    <div class="card-body">
+                            <div id="question" class="card-title">Question</div>
+                            <div id="answer-buttons" class="btn-grid">
+                                <button type="button" class="btn btn-primary" id="A" onclick="checkAnswer('A')">Answer A</button>
+                                <button type="button" class="btn btn-primary" id="B" onclick="checkAnswer('B')">Answer B</button>
+                                <button type="button" class="btn btn-primary" id="C" onclick="checkAnswer('C')">Answer C</button>
+                                <button type="button" class="btn btn-primary" id="D" onclick="checkAnswer('D')">Answer D</button>
+                            </div>
+                    </div>
+                  </div>
+                <div class="controls">
+                    <button id="start-btn" class="btn btn-primary">Start</button>
+                </div>
+                <div class="response">
+                    <div id="response-correct"class="hide" >Correct!</div>
+                    <div id="response-wrong" class="hide">Wrong!</div>
+                </div>
+                <div class="end-game">
+                    <div id="done-message" class="hide">All Done!</div>
+                    <div id="score-message" class="hide"></div>
+                    <div id="initials-label" class="hide">Enter Your Initials Here</div>
+                    <input id="initials-textbox" class="hide"></div>
+                    <div id="error-message" class="hide">Please Enter Your Initials Before Submitting</div>
+                    <button id="initials-btn" class="btn btn-success hide">Submit</button>
+                </div>
+                <div id="high-score" class="hide">
+                    <div id="high-score-message">Highscores</div>
+                    <div id="high-score-results" class="card">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
-    <div class="controls">
-        <button id="start-btn" class=>Start</button>
-        <button id="next-btn" class="hide">Next</button>
-    </div>
-    <div class="response">
-        <div id="response-correct"class="hide" >Correct!</div>
-        <div id="response-wrong" class="hide">Wrong!</div>
-    </div>
-    <div class="end-game">
-        <div id="done-message" class="hide">All Done!</div>
-        <div id="score-message" class="hide"></div>
-        <div id="initials-label" class="hide">Enter Your Initials Here</div>
-        <input id="initials-textbox" class="hide"></div>
-        <div id="error-message" class="hide">Please Enter Your Initials Before Submitting</div>
-        <button id="initials-btn" class="hide">Submit</button>
-    </div>
-    <div id="high-score" class="hide">
-        <div id="high-score-message">Highscores</div>
-        <span id="user-initials"></span> <span id="user-score"></span>
-    </div>
+    <script defer src="questions.js"></script>
+    <script defer src="script.js"></script>
+    </body>
 </html>
